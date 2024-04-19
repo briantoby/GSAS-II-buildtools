@@ -51,17 +51,13 @@ jobs:
         run: |
           cd install
           python setgitversion.py ../_gsas2
-          if [ "$RUNNER_OS" == "Windows" ]; then
-             conda build g2complete --output-folder C:/tmp/builds
-          else
-             conda build g2complete --output-folder ~/build
-          fi
+          conda build g2complete --output-folder ../build
 
       # for testing, upload the .sh/.exe file created here
       - name: Upload artifact  # creates zip file with directory contents
         uses: actions/upload-pages-artifact@v3
         with:
-            path: ~/build
+            path: build
             name: build
             retention-days: 1
     
