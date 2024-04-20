@@ -37,10 +37,13 @@ jobs:
       - name: create conda gsas2complete package
         shell: bash -l {0}
         run: |
+          mkdir ~/build
+          mkdir ~/build/linux-64
+          ls -lR ~/build
+          cp -v pkgs/*  ~/build/linux-64/
           cd install
           python setgitversion.py ../_gsas2
-          mkdir ~/build
-          conda build g2complete --output-folder ~/build
+#          conda build g2complete --output-folder ~/build
           ls -lR ~/build
 
       - name: create conda gsas2full installer
