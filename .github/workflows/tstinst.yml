@@ -53,8 +53,12 @@ jobs:
           echo cat tstinst/construct.yaml
           cat tstinst/construct.yaml
           CONDA_SOLVER=classic constructor tstinst   # can't use mamba in constructor 3.7
+          # remove the g2complete package before testing installer
+          rm -rf ~/build
+          # now test the self-installer
           ls -lt *.sh
           bash `ls *.sh` -b -p ~/testinstall
+          # prepare to archive self-installer
           mkdir ../upload
           cp -v *.sh ../upload
 
