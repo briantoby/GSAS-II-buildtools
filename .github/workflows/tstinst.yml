@@ -43,7 +43,7 @@ jobs:
           cp -v pkgs/*  ~/build/linux-64/
           cd install
           python setgitversion.py ../_gsas2
-#          conda build g2complete --output-folder ~/build
+          #conda build g2complete --output-folder ~/build
           ls -lR ~/build
 
       - name: create conda gsas2full installer
