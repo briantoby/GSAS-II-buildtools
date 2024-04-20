@@ -1,0 +1,64 @@
+# Build the tstinst self installer with Linux
+#
+
+name: build tstinst
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    name: build on ubuntu-latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+                  
+      - name: Set up conda  # note that conda-build-env.yml fixes Python & numpy versions (alas)
+        #uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@030178870c779d9e5e1b4e563269f3aa69b04081 # v3.0.3 using hash for security
+        with:
+          activate-environment: build
+          environment-file: install/g2complete/conda-build-env.yml
+          miniforge-version: latest
+
+      - name: install to old conda/constructor and then back to latest
+        shell: bash -l {0}
+        run: |
+          conda create -n construct constructor=3.3 python=3.10 -y
+          conda activate construct
+          conda install constructor=3.7 -y
+          
+#      - name: Get GSAS-II sources
+#        shell: bash -l {0}
+#        run: |
+#          git clone --depth 50 https://github.com/AdvancedPhotonSource/GSAS-II.git _gsas2          
+
+#      - name: create conda gsas2complete package
+#        shell: bash -l {0}
+#        run: |
+#          cd install
+#          python setgitversion.py ../_gsas2
+#          if [ "$RUNNER_OS" == "Windows" ]; then
+#             conda build g2complete --output-folder C:/tmp/builds
+#          else
+#             conda build g2complete --output-folder ~/build
+#          fi
+
+      - name: create conda gsas2full installer
+        shell: bash -l {0}
+        run: |
+          cd install
+          conda activate construct
+          CONDA_SOLVER=classic constructor tstinst   # can't use mamba in constructor 3.7
+          ls -lt *.sh
+          mkdir ../upload
+          cp -v *.sh ../upload
+
+      # for testing, upload the .sh/.exe file created here
+      - name: Upload artifact  # creates zip file with directory contents
+        uses: actions/upload-pages-artifact@v3
+        with:
+            path: upload
+            name: constructor
+            retention-days: 1
