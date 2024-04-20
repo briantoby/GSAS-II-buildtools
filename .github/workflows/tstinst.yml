@@ -29,21 +29,18 @@ jobs:
           conda activate construct
           conda install constructor=3.7 -y
           
-#      - name: Get GSAS-II sources
-#        shell: bash -l {0}
-#        run: |
-#          git clone --depth 50 https://github.com/AdvancedPhotonSource/GSAS-II.git _gsas2          
+       - name: Get GSAS-II sources
+         shell: bash -l {0}
+         run: |
+           git clone --depth 50 https://github.com/AdvancedPhotonSource/GSAS-II.git _gsas2          
 
-#      - name: create conda gsas2complete package
-#        shell: bash -l {0}
-#        run: |
-#          cd install
-#          python setgitversion.py ../_gsas2
-#          if [ "$RUNNER_OS" == "Windows" ]; then
-#             conda build g2complete --output-folder C:/tmp/builds
-#          else
-#             conda build g2complete --output-folder ~/build
-#          fi
+       - name: create conda gsas2complete package
+         shell: bash -l {0}
+         run: |
+           cd install
+           python setgitversion.py ../_gsas2
+           conda build g2complete --output-folder ../pkgs
+           ls -lR ../pkgs
 
       - name: create conda gsas2full installer
         shell: bash -l {0}
