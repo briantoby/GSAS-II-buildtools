@@ -39,15 +39,18 @@ jobs:
         run: |
           cd install
           python setgitversion.py ../_gsas2
-          mkdir ~/pkgs
-          conda build g2complete --output-folder ~/pkgs
-          ls -lR ~/pkgs
+          mkdir ~/build
+          conda build g2complete --output-folder ~/build
+          ls -lR ~/build
 
       - name: create conda gsas2full installer
         shell: bash -l {0}
         run: |
           cd install
           conda activate construct
+          cp g2full/construct.yaml tstinst/construct.yaml
+          echo cat tstinst/construct.yaml
+          cat tstinst/construct.yaml
           CONDA_SOLVER=classic constructor tstinst   # can't use mamba in constructor 3.7
           ls -lt *.sh
           mkdir ../upload
