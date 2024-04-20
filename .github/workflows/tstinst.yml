@@ -26,9 +26,10 @@ jobs:
         shell: bash -l {0}
         run: |
           #conda create -n construct constructor=3.3 python=3.10 -y
-          conda create -n construct constructor=3.7 python=3.10 -y
-          conda activate construct
+          #conda activate construct
           #conda install constructor=3.7 -y
+          conda create -n construct constructor=3.7 python=3.11 -y
+          conda activate construct
           
       - name: Get GSAS-II sources
         shell: bash -l {0}
