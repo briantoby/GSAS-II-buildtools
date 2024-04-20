@@ -38,12 +38,9 @@ jobs:
         shell: bash -l {0}
         run: |
           mkdir ~/build
-          mkdir ~/build/linux-64
-          ls -lR ~/build
-          cp -v pkgs/*  ~/build/linux-64/
           cd install
           python setgitversion.py ../_gsas2
-          #conda build g2complete --output-folder ~/build
+          conda build g2complete --output-folder ~/build
           ls -lR ~/build
 
       - name: create conda gsas2full installer
@@ -56,6 +53,7 @@ jobs:
           cat tstinst/construct.yaml
           CONDA_SOLVER=classic constructor tstinst   # can't use mamba in constructor 3.7
           ls -lt *.sh
+	  bash `ls *.sh` -b -p ~/testinstall
           mkdir ../upload
           cp -v *.sh ../upload
 
