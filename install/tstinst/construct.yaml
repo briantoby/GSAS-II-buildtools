@@ -24,7 +24,8 @@ specs:
     - git
     - gitpython
 #    - pkgs/linux-64_gsas2pkg-5.1.0-0.tar.bz2
-    - ../pkgs/gsas2complete-5781-0.tar.bz2
+#    - ../pkgs/gsas2complete-5781-0.tar.bz2
+    - ../pkgs/linux-64/gsas2complete-5781-0.tar.bz2
 
 post_install: postinstall.sh
 
