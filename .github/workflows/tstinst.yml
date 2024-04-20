@@ -53,7 +53,7 @@ jobs:
           cat tstinst/construct.yaml
           CONDA_SOLVER=classic constructor tstinst   # can't use mamba in constructor 3.7
           ls -lt *.sh
-	  bash `ls *.sh` -b -p ~/testinstall
+          bash `ls *.sh` -b -p ~/testinstall
           mkdir ../upload
           cp -v *.sh ../upload
 
