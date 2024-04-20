@@ -39,8 +39,9 @@ jobs:
         run: |
           cd install
           python setgitversion.py ../_gsas2
-          conda build g2complete --output-folder ../pkgs
-          ls -lR ../pkgs
+          mkdir ~/pkgs
+          conda build g2complete --output-folder ~/pkgs
+          ls -lR ~/pkgs
 
       - name: create conda gsas2full installer
         shell: bash -l {0}
