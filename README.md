@@ -1,3 +1,5 @@
+**Purpose of this branch is to save the g2complete via a saved archive**
+
 This repo contains files used for building GSAS-II binaries and
 distribution kits from the test git reops found in this organization as well as files for
 download. For downloads, look here: https://github.com/AdvancedPhotonSource/GSAS-II-buildtools/releases/latest
